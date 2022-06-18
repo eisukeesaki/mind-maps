@@ -6,18 +6,56 @@ REST
     architectural style
         distributed hypermedia systems
     REST API
+        consists
+            assembly of interlinked resources
+                resource model
+        principles
+            uniform interface
+                identification of resources
+                    interface must uniquely identify each reseource
+                        involved in the interaction between the client and the server
+                manipulation of resources through representations
+                self-descriptive messages
+                hypermedia as the engine of application state
+            client-server
+                enforces separation of concerns
+                    helps client and server components to evolve independently
+                    separation of UI concerns and data storage concerns
+                        improves portability of UI across multiple platforms
+                developers must make sure that the interface/contract between the client and the server does not break
+            stateless
+                each request from the client to the server
+                    must contain all information necessary to understand and complete the request
+                server cannot take advantage of previously stored context information on the server
+            cacheable
+                response should label itself as cacheable or non-cacheable
+            layered system
+                allows an architecture to be composed of hierarchical layers by contraining component behavior
+                    each component cannot see beyond the immediate layer they are interacting with
+            optional
+                code on demand
         resource
-            any concept that might be the target of an author's hypertext reference
-            abstraction of information
-            examples
-                users of the system
-                customer orders
-                network devices
-                image
-                temporal service
-                non-virtual objects
-                    human
-            primary data representation
+            what
+                any concept that might be the target of an author's hypertext reference
+                data
+                functionality
+                examples
+                    users of the system
+                    customer orders
+                    network devices
+                    image
+                    temporal service
+                    non-virtual objects
+                        human
+            resource representation
+                state of resource
+                consists
+                    data
+                    metadata
+                    hypermedia links
+                exchanged using standardized interace and protocol
+                    HTTP commonly used
+            is primary data representation
                 naming practices
                     use
                         nouns
@@ -106,6 +144,25 @@ REST
                             use verb
                                 exception
                                     use nouns for all other archetypes of resources
+            identified
+                Uniform Resource Identifier
+            hypermedia
+                media type
+                    data format of representation
+                    identifies specifications that defines how a representation is to be processed
+                hypertext
+                    does not need to be
+                        HTML
+                        XML
+                        JSON
+                hypertext or hypermedia means the simultaneous presentation of information and controls such that the information becomes the affordance through which the user obtains choices and selects action
+            self-descriptive
+                clients should be able to act based on the media type associated with the resource
+            resource methods
+                used to perform desired transition between two states of any resource
+                != HTTP methods
+            
+                
 
 ```
 

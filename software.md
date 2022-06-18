@@ -3,6 +3,11 @@
 ```text
 
 software
+    automated solution to problem
+        problem arises in
+            familiar to users of software
+                context
+                domain
     consists of
         programs
         documentation
