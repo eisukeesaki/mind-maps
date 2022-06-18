@@ -38,16 +38,17 @@ my mind maps
         THIS
             references main node
     operators
-        └─ link a child node under a specific word
-        example
-            OAuth
-                HTTP server
-                    asks
-                        user for consent
-                            to share their data to web application
-                                            └─ stored inside OAuth provider's database
-                                consent page
-                                    consent.html
+        └─
+            link a child node under a specific word
+            example
+                OAuth
+                    HTTP server
+                        asks
+                            user for consent
+                                to share their data to web application
+                                                └─ stored inside OAuth provider's database
+                                    consent page
+                                        consent.html
 
 ```
 

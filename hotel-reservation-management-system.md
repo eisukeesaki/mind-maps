@@ -126,7 +126,7 @@ hotel reservation management system
 
 ```text
 
-future versions
+in future versions do
     re-write in TypeScript
         write modules as ES Modules
 
