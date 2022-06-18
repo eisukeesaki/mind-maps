@@ -1,6 +1,6 @@
 # Acekay's information organization language
 
-## mind map schema
+## mind map schema at a glance
 
 Acekay's mind map schema expressed in mind map format.
 
@@ -32,8 +32,26 @@ my mind maps
                         more specific
                     not always considred
                         just like in this case
+    constraints
+        node string must be unique
+    controlled vocabularies
+        THIS
+            references main node
+    operators
+        └─ link a child node under a specific word
+        example
+            OAuth
+                HTTP server
+                    asks
+                        user for consent
+                            to share their data to web application
+                                            └─ stored inside OAuth provider's database
+                                consent page
+                                    consent.html
 
 ```
 
-## controlled vocabulary
+## my mind maps
+
+## controlled vocabularies
 
