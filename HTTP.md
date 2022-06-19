@@ -87,6 +87,55 @@ HTTP
                 Multiple-resource
                     1st section of info
                     Nth section of info
-
+    HTTP sessions
+        a solution
+            means to eliminate the need for clients to make authentication requests every time before they make any other requests
+        secret
+            key used to sign session identifier
+        session data
+            association of user's account information and session identifier
+                session identifier
+                    saved on
+                        server
+                        backend database
+                        client's cookie
+            storage location
+                backend database
+                    sessions table
+                    centralized maner
+                        server has full control
+                    does not act against distribution of servers(i.e scaling)
+                    requires extra hop
+                        relatively slow
+                server memory
+                    fast
+                        does not require hop to backend database
+                    scaling issues
+                        scaling
+                            distribution of server load
+                                having multiple server instances across different computing resources
+                                    distribution of server instances
+                        session being stored on one particular server act against scaling of backend server
+                client-side
+                    decentralized manner
+                    methods for achievement
+                        use of
+                            JWT
+                                means of representing claims to be transferred between two parties
+                    easy to implement
+                        no need to store, fetch, process on server side
+                    server cannot immediately revoke/invalid user
+        transmission channel
+            application layer
+                HTTPS
+        libraries
+            express-session
+                session middleware
+                session()
+                    creates new session middleware
+            connect-pg-simple
+                API used to abstract session store management
+                designed for PostgreSQL
+            
 ```
 
