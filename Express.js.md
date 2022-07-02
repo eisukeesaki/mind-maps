@@ -21,6 +21,24 @@ Express.js
     pass control to next middleware in stack
         next()
         ?next('route')
+    directory structure
+        tests/
+            unit/
+                utils/
+        src/
+            routes/
+            middlewares/
+            controllers/
+            services/
+            utils/
+            configs/
+            models/
+                ORM related things
+        index.js
+        LICENSE
+        package.json
+        package-lock.json
+        README
 
 ```
 
