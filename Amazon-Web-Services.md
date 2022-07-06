@@ -2,8 +2,8 @@
 
 ```text
 
-Amazon Web Services
-    Elastic Cloud 2
+Amazon Web Services (AWS)
+    Elastic Cloud 2 (EC2)
         computational resources
         UI tools
             awscli
@@ -81,8 +81,60 @@ Amazon Web Services
                   Billing Console
                       create budget
                           wait for AWS Cost Management to become available
-    Virtual Private Cloud
+    Virtual Private Cloud (VPC)
         ? environment to launch AWS services
+    RDS over EC2
+        Relational Database Service (RDS)
+            managed database service
+                functions
+                    handles
+                        relational database
+                            configuration
+                                set up
+                            administration
+                                operate
+                                scale
+                                other management tasks
+                    features
+                        backups
+                        patching
+                        automatic failure detection
+                        recovery
+                        high availability
+                        access management
+                            AWS identity
+                                AWS Access Management
+                Aurora
+                    fully-managed relational database engine
+                        compatibility
+                            MySQL
+                            PostgreSQL
+                        features
+                            high performance storage subsystem
+                                high throughput
+                                    distributed storage
+                                        storage
+                                            grows automatically as needed
+                            automate & standaridize
+                                clustering
+                                replication
+                        uses RDS features for
+                            configuration
+                            administration
+                        handles
+                          routine tasks
+                              tasks
+                                  ?provisioning
+                                  patching
+                                  backup
+                                  failure recovery
+                                  failure detection
+                                  repair
+                              interface
+                                  RDS AWS Management Console                               
+                                  CLI commands
+                                  API operations
+
 
 ```
 
