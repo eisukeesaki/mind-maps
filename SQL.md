@@ -5,7 +5,9 @@
 SQL
     statements
         Data Definition Language = DDL
-            CREATED
+            CREATE
+                CREATE DATABASE
+                    creates new database by copying template1
             ALTER
             DROP
             GRANT

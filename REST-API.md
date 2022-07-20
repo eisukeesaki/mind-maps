@@ -2,10 +2,25 @@
 
 ```text
 
-REST
+REST API
+    endpoints
+        route path
+        request method
+
+REST notes
     architectural style
         distributed hypermedia systems
     REST API
+        how to design
+            create object model
+            create model URIs
+            determine resource representations
+            assign HTTP methods to URIs
+            more to implement
+                logging
+                security
+        is
+            way to expose data from a server
         consists
             assembly of interlinked resources
                 resource model
