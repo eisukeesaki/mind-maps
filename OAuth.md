@@ -82,13 +82,18 @@ OAuth
                                 provide information
                                     application information
                                     application domain
+                                        authorized domains
                                     developer contact information
                                 configure scopes
+                                    .../auth/userinfo.profile
                                 register test users
                             create credentials
                                 OAuth client ID
                                     provide information
+                                        authorized redirect URIs
                                     get client secret
+                            ?verify application in order to allow all users on the internet to use OAuth 
+                                https://support.google.com/cloud/answer/10311615?authuser=1#user-type
             identity server
                 https://accounts.google.com
                     authentication

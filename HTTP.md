@@ -88,8 +88,14 @@ HTTP
                     1st section of info
                     Nth section of info
     HTTP sessions
-        a solution
-            means to eliminate the need for clients to make authentication requests every time before they make any other requests
+        what it is
+            series of requests and responses associated with a particular user
+            allows a state to be maintained between application server and user agents
+                use cases
+                    maintain
+                        an authentication state
+                        other states
+                if effect, it creates a stateful protocol on top of HTTP
         secret
             key used to sign session identifier
         session data
