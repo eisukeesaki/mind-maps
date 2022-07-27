@@ -1,4 +1,4 @@
-# Passport.js
+[#](#) Passport.js
 
 ```text
 
@@ -17,13 +17,10 @@ Passport
                 OpenID Connect
                 ...
         used as middleware within web application servers
-            middleware
+            app.METHOD("/login")
                 passport.authenticate(strategyName[, options][, callback])
         how to implement
             Sign in with Google integrated within Express application
-                initialize and mount session middleware
-                    app.use()
-                        express-session
                 install Passport
                 install Strategy
                 configure Strategy
@@ -64,25 +61,30 @@ Passport
                                         ?if session user no longer exist in database
                                             fn will passed a null or false to serializeUser
                                         
-                instantiate Passport class
-                    require("passport")
                 register Strategy
                     passport.use(strategy)
+                instantiate Passport class
+                    require()
                 mount Passport to middleware stack
                     app.use()
                         passport.initialize()
                             returns middleware
                                 sets req._passport
                                     used by Passport
+                mount session middleware
+                    app.use()
+                        initialize
+                            express-session
+                                ___ ___ cookie
+                                    reads from
+                                    writes to
                 mount Passport's session support to middleware stack
                     app.use()
-                        after mounting express session middleware
                         passport.session()
                             runs
                                 built-in SessionStrategy
                                     calls
                                         deserializeUser(session.passport.user, done)
-                                
                             returns middleware
                                 reads user out of session
                                     if user found
@@ -120,7 +122,7 @@ Passport
                                 delete login session
                                     remove req.user 
                                         if there is any
-                                        isAuthenticated()
+                            isAuthenticated()
                         parameters
                             strategyName
                                 can be array
