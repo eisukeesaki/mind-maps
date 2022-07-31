@@ -4,11 +4,12 @@
 dev env
     todo
         tmux
-            fix tmux-ressurect not ressurecting Neovim sessions
-                https://github.com/tmux-plugins/tmux-resurrect
-                https://github.com/tpope/vim-obsession
-            setup tmux-continuum
-                https://github.com/tmux-plugins/tmux-continuum
+            tmux-ressurect
+                setup pane content restoration
+                    https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_pane_contents.md
+                not ressurecting Neovim sessions
+                    https://github.com/tmux-plugins/tmux-resurrect
+                    https://github.com/tpope/vim-obsession
             assign key bind to switch window by index name
                 relevant command
                     select-window

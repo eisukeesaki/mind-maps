@@ -31,7 +31,7 @@ Passport
                                 ?callback function that encodes and verifies credentials
                                     verify(accessToken[, refreshToken], profile, done) callback function
                                         recieves accesstoken
-                                        cb()
+                                        done()
                                             sets authenticated user to req.user
                         example
                             const strategyOptions = {
