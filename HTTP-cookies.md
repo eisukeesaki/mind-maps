@@ -3,10 +3,11 @@
 ```text
 
 HTTP cookies
+    cookies
+        represents particular client
+        indicates that client has made a request to server before
 
-HTTP cookies - notes - MDN documentations
-
-HTTP cookies - notes - Wikipedia
+HTTP cookies - notes from reading
     A.K.A
         cookies
         web cookies
@@ -96,6 +97,99 @@ HTTP cookies - notes - Wikipedia
             used by
                 servers to authenticate that a user is logged in
                     and with which account
+                flow of cookie based authentication
+                    client
+                        does not have a session at this point
+                        makes request to server to get protected resource
+                            request target URL of this request becomes
+                                __original__ request target URL
+                    sever
+                        receives request asking for protected resource
+                        creates a new session
+                        generates a SID
+                        associate the SID to the new session
+                        inserts SID into response header
+                        sends
+                            the location of login page
+                            SID in response header
+                    client
+                        recieves response indicating redirection
+                        saves received SID on client's disk
+                        inserts
+                            entered credentials in request body
+                            SID in request header
+                        makes request to authenticate itself
+                    server
+                        receives request
+                            asking for authentication
+                            contains SID in header
+                        using received SID, tries to find corresponding session in session store
+                        using the received credentials, tries to retrieve a user record out of persistent data store
+                        if ___ is found
+                            ___
+                                a user record
+                                    that matches received credentials
+                                session
+                                    that has the same SID as the received SID
+                            associates user identifer with current session and
+                                saves it in session store
+                            inserts in response header
+                                location of "original request target"
+                                SID of current session
+                            sends response
+                        else
+                            inserts
+                                location of login page in response header
+                                SID of current session
+                            sends response
+                    client
+                        if successfully authenticatd in previous request
+                            receives response that
+                                indicates redirection to original request target URL
+                                contains SID
+                            saves SID on client's disk
+                            inserts in request header
+                                original request target URL
+                                received SID
+                            sends request to get the originally requested, protected resource
+                        else
+                            receives response that
+                                indicates redirection to login page
+                                contains SID
+                            saves SID on client's disk
+                            inserts in request header
+                                URL of login page
+                                received SID
+                            sends request to get login page
+                    server
+                        either
+                            A
+                                receives request
+                                    asking for protected resource
+                                    contains SID
+                                using received SID, tries to find corresponding session in session store
+                                if a session is found
+                                    validate association of session and user record in persistent data store
+                                        specifically
+                                            use the user identifier as a key to find a user record in persistent data store
+                                    if a session is associated with a user record
+                                        specifically
+                                            if a user record is found
+                                        insert to request body
+                                            protected resource
+                                        insert to request header
+                                            SID
+                                        send response to client
+                                    else
+                                        insert to response header
+                                            location of login page
+                                            SID
+                                        send respnose to client
+                            B
+                                receives request
+                                    asking for login page
+                                    contains SID
+                                ...
     structure
         components
             name=value pair
@@ -106,7 +200,7 @@ HTTP cookies - notes - Wikipedia
                     Secure
                     HttpOnly
                     SameSite
-    uses
+    use cases
         session management
             establishing and maintain stateful communication
                 flow
@@ -137,7 +231,7 @@ HTTP cookies - notes - Wikipedia
                         upon successful authentihcation
                             associates user identity data with received session identifier
                                 and stores it in a database
-            server should regenerate and send new session cookies whenever authentication takes place
+            server should regenerate and send new session cookies whenever authentication takes [place](place)
         personalization
             a use case of session management
             examples

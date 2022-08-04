@@ -32,6 +32,8 @@ sessions
                                 stores
                                     unique session identifer
                                     unique user identifier
+                            example use case
+                                shopping cart
                         volatile storage
                             RAM
                                 reserve portion of RAM on the server to store states
@@ -41,6 +43,13 @@ sessions
                                 methods of sharing session state
                                     multicast session data to member nodes
                                     ...
+                    session state
+                        data structure
+                            key-value pair
+                                key
+                                    user identifier
+                                value
+                                    session data
                 web sessions
                     related problmes
                         session hijacking

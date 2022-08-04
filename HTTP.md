@@ -122,7 +122,7 @@ HTTP
             allows optimizations
                 header compression
                 multiplexing
-        request
+        HTTP request
             structure
                 head
                     start-line
@@ -190,7 +190,7 @@ HTTP
                         Single-resource
                         Multiple-resource
                             HTML Forms
-        response
+        HTTP response
             status(start) line
                 protocol version
                     HTTP/1.0
