@@ -34,7 +34,7 @@ Redis
             has no authentication
             when using for production do
                 firewall the port the Redis server listens to
-                specify network interface to only listen to
+                specify the only network interface to listen to
                 setup authentication
                     require clients to run AUTH command
                 use SSL tunneling to encrypt traffic between servers and clients
