@@ -27,8 +27,6 @@ dev env
             P0
                 enable use of user defined snippets
                 find way to indicate modified lines since previous commit
-                can't use tab key to switch between Vim tabs
-                    ?vim-wiki binds tab ket to something. re-bind it
             when [opening](opening) new [?file, ?buffer] in a new vertical split window from [telescope], open a new window in the right. not left
             caps lock issue
                 insert mode only CL

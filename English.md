@@ -36,6 +36,11 @@ English words
                                 second hand information
                                     formal documentation
                                     ...
-                
-```
+    differences
+        'in order to' vs 'so as to'
+            in order to
+                subject to a prior/pre-condition
+            so as to
+                subject to fulfillment of a condition
+    ```
 

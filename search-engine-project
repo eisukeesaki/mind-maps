@@ -1,0 +1,55 @@
+MOTIVATION
+==========
+
+I want to search the web in a way that I want. I want to use a ranking algorithm of my own, which is tailored to suit my preferences. I want to see the web with my own intellectual eyes.
+
+REQUIREMENTS
+============
+
+Create and host a website on AWS EC2.
+When a end-user makes a request to fetch the contents at the root path of the website, the website's web server will return to the user agent, a HTML document consisting of an HTML form.
+This form will be rendered on web browsers and used by human end-users to do a web search for the keyword `pizza`, and only for the word `pizza`.
+
+On the back-end side of the website, the website will have at their disposal, records of inverted indexes that maps words in a particular HTML document body to the URL of that document.
+The inverted indexes must be a product of a web crawler. The web crawler must take a seed file that specifies a list of URLs. It must automatically visit and download the HTML documents served at all given locations.
+
+When the web server receives the search query (`pizza`) through an HTTP request, it will try to find in the indexe store, all the records that has the value `pizza` as their key. Then, the server must return the found list of records to the user agent that initiated the HTTP request.
+
+Here are the list of websites to create an inverted index out of, and perform a search on:
+websites
+    website A
+        URL
+            bobs-italian-restaurant.com
+        document
+            ...
+            <h1>Our menu</h1>
+            <ul><li>The Italian classic pizza</li></ul>
+            ...
+    website B
+        URL
+            amys-pizza-place.com
+        docuemnt
+            ...
+            <h1>Our menu</h1>
+            <ul><li>Vegan pizza</li></ul>
+            ...
+    website C
+        URL
+            joes-shoes.com
+        document
+            ...
+            <h1>Leather shoes</h1>
+            <ul><li>Vintage Italian shoes</li></ul>
+            ...
+
+website
+    web service
+        
+ISSUES
+======
+
+build indexer
+
+TOOLS
+=====
+
