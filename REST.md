@@ -5,89 +5,130 @@
 notes - Roy Fielding's paper
     Network-based Architectural Styles
     ##################################
-        client-server style
+        hierarchical styles
         ===================
-            architectural style for network-based applications
-                implementation of separation of concerns
-            architecutral components
-                server
-                    a reactive process
-                        offers set of services
-                    waits for requests to be made and then reacts to them
-                        listens for requests upon services
-                        rejects or performs request and sends response to client
-                    common properties
-                        a non-terminating process
-                        provides service to more than one client
-                client
-                    a triggering process
-                        consumes services
-                    makes requests that triggers reactions from servers
-                        sends requests to server via connector
-        layerd system
-        =============
-            is
-                organized hierarchically
-            provides service
-                to layer above itself
-            uses services
-                of layer below itself
-            use within networked-based systems is limited
-                to its combination with the client-server style
-                    to provide layere-client-server
-                        layered-client-server
-                        ---------------------
-                            adds ___
+            Client-Server (CS)
+            ------------------
+                architectural style for network-based applications
+                    implementation of separation of concerns
+                architecutral components
+                    server
+                        a reactive process
+                            offers set of services
+                        waits for requests to be made and then reacts to them
+                            listens for requests upon services
+                            rejects or performs request and sends response to client
+                        common properties
+                            a non-terminating process
+                            provides service to more than one client
+                    client
+                        a triggering process
+                            consumes services
+                        makes requests that triggers reactions from servers
+                            sends requests to server via connector
+            Layerd System (LS)
+            ------------------
+                is
+                    organized hierarchically
+                provides service
+                    to layer above itself
+                uses services
+                    of layer below itself
+                use within networked-based systems is limited
+                    to its combination with the client-server style
+                        to provide Layere-Client-Server
+                            Layered-Client-Server (LCS)
+                            ---------------------------
+                                adds ___
+                                    ___
+                                        proxy
+                                            acts as a shared server for one or more client components
+                                            roles
+                                                takes request
+                                                forwards request
+                                                    to server components
+                                                can translate requests
+                                        gateway
+                                            appearts to be normal server
+                                                to
+                                                    ___ that request its services
+                                                        ___
+                                                            clients
+                                                            proxies
+                                            roles
+                                                takes request
+                                                forwards request
+                                                    to inner-layer server components
+                                                can translate requests
+                                        is
+                                            additional mediator server components
+                                            solution
+                                                to managing identity
+                                                    in a large scale distributed system
+                                                        where complete knowledge of all servers would be prohibitively expensive
+                                                    the solution
+                                                        instead of trying to store complete knowlege of all servers,
+                                                            servers are organized in layers
+                                                                such that rarely used services are handled by intermediaries
+                                                                    rather than directly by each client
+                                        enables
+                                            features of the system
+                                                load balancing
+                                                security checking
+                                    to client-server style
+                implementation examples
+                    TCP/IP
+                    OSI protocol stacks
+                    hardware interface libraries
+                induces disadvantages
+                    increased ___
+                        ___
+                            overhead
+                            latency
+                        to the processing of data
+                        induces
+                            reduced user-percieved performance
+        mobile code styles
+        ==================
+            Code on Demand (COD)
+            --------------------
+                code
+                    is
+                        set of instructions on how to process a given resource
+                client component
+                    has access to resources
+                        but not the know-how to process them
+                    makes a request
+                        to get code representing the know-how to process the resource
+                    executes the code to process the resource locally
+                                   └─ know-how
+                induces advantages
+                    ability to add features to a deployed client
+                        induces advantages
+                            improved ___
                                 ___
-                                    proxy
-                                        acts as a shared server for one or more client components
-                                        roles
-                                            takes request
-                                            forwards request
-                                                to server components
-                                            can translate requests
-                                    gateway
-                                        appearts to be normal server
-                                            to
-                                                ___ that request its services
-                                                    ___
-                                                        clients
-                                                        proxies
-                                        roles
-                                            takes request
-                                            forwards request
-                                                to inner-layer server components
-                                            can translate requests
-                                    is
-                                        additional mediator server components
-                                        solution
-                                            to managing identity
-                                                in a large scale distributed system
-                                                    where complete knowledge of all servers would be prohibitively expensive
-                                                the solution
-                                                    instead of trying to store complete knowlege of all servers,
-                                                        servers are organized in layers
-                                                            such that rarely used services are handled by intermediaries
-                                                                rather than directly by each client
-                                    enables
-                                        features of the system
-                                            load balancing
-                                            security checking
-                                to client-server style
-            implementation examples
-            =======================
-                TCP/IP
-                OSI protocol stacks
-                hardware interface libraries
-            induced disadvantages
-            =====================
-                increased ___
-                    ___
-                        overhead
-                        latency
-                    to the processing of data
-                    induces
-                        reduced user-percieved performance
+                                    extensibility
+                                    configurability
+                                    user-percieved performance
+                                    efficiency
+                                    scalability of server
+                                        induced by
+                                            enabling the server to off-load work to the client
+                                                that would otherwise consumed its resources
+                                when the code can adapt its actions to the client's environment
+                                    and interact with the user locally
+                                        rather than through remote interactions
+                        induces disadvantages
+                            reduced simplicity
+                                due to the need to manage the evaluation environment
+                                may be compensated
+                                    as a result of simplifying the client's static functionality
+                            lack of visibility
+                                induced by
+                                    server sending code instead of simple data
+                                induces
+                                    deployment problems
+                                        if the client cannot trust the servers
     perspectives on the process of architecutral designs
         a perspective
             purposes the process
@@ -122,14 +163,17 @@ notes - Roy Fielding's paper
                 property
                     hybrid-style
                         style is derived from several other network-based architectural styles
+            consists of
+                set of architecutral constraints
+                    chosen for the properties they induce
+                        on candidate architectures
         REST constraints
         ================
             null-style
             ----------
                 empty set of constaints
-                describes a system
-                    no distinguished boundaries between architecutral components
-            client-server 
+                no distinguished boundaries between architecutral components
+            Client-Server 
             -------------
                 'separation of concerns'
                     concerns
@@ -165,7 +209,9 @@ notes - Roy Fielding's paper
                                     server does not have to manage resource usage across requests
                 disadvantages
                     increased per-interaction overhead
-                    placing application states on the client-side reduces control over consistent application behavior
+                    reduced control over consistent application behavior
+                        induced by
+                            placing application states on the client-side 
             cache
             -----
                 purpose
@@ -178,12 +224,12 @@ notes - Roy Fielding's paper
                             non-cacheable
                 client-cache-stateless-server style
                     cacheable response
-                        client cache
-                            reuses response data
-                                requests
+                        client cache reuses response data
+                            for ___ requests
+                                ___
                                     later
                                     equivalent
-                induced advantages
+                induces advantages
                     improved
                         efficiency
                         scalability
@@ -197,7 +243,7 @@ notes - Roy Fielding's paper
                                     decreased average latency of a series of interactions
                 trade-off
                     disadvantage
-                        induced properties
+                        induces architecutral properties
                             decreased reliability
                                 induced by
                                     significant difference between
@@ -210,8 +256,8 @@ notes - Roy Fielding's paper
                     application of 'generality'
                         to
                             architecutral component interface
-                    designed to be efficient for
-                        common case of the Web
+                    designed to increase efficiency
+                        for common case of the Web
                 interface constaints
                     is
                         constraints needed to guide the behavior of architecutral components
@@ -237,7 +283,7 @@ notes - Roy Fielding's paper
                                     of information
                             because the architecture does not
                                 use transferring methods which is most appropriate for a specific application's need
-            layered system
+            Layered System
             --------------
                 allows an achitecture to be composed of
                     hierarchical layers
@@ -269,7 +315,7 @@ notes - Roy Fielding's paper
                 promotes substrate independence                           
                     induced by
                         placing bounds on the overall system complexity
-                induced disadvantage
+                induces disadvantage
                     increased ___
                         ___
                             overhead
@@ -282,18 +328,35 @@ notes - Roy Fielding's paper
                             by the benefits
                                 of shared caching
                                     at intermediaries
-                induced architectural properties
+                induces architectural properties
                     by combination of ___
                         ___
                             layerd system
                             uniform interface constraints
                         data flows of hypermedia interaction can each be processed like a data-flow network
+                            regardless of the fact that REST interaction is two-way
                         filter components can be selectively applied
                             to the data stream
                                 in order to
                                     transform the content as it passes
-            code-on-demand
-            --------------
+            Code-on-Demand (COD)
+            --------------------
+                is
+                    optional constraint
+                    ^^^^^^^^^^^^^^^^^^^
+                induces advantages
+                    extension of client functionality
+                        by
+                            downloading and executing code
+                                form of code
+                                    applets
+                                    scripts
+                    simplification of clients
+                        induced by
+                            reduced number of features required to be pre-implemented
+                induces disadvantages
+                    reduced visibility
+                ?architecture only gains benefit when they are known to be in effect for some realm of the overall system
             style derivitation summary
             --------------------------
         REST architecutral elements
@@ -316,12 +379,9 @@ notes - Roy Fielding's paper
             --------------
             data view
             ---------
-                        
-                    
-                                
                                 
                 
-REST notes
+notes - REST Tutorial by Lokesh Gupta
     architectural style
         distributed hypermedia systems
     REST API
@@ -498,4 +558,4 @@ REST notes
 ## external links
 
 * [Roy Fielding's paper](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
-* [REST API Tutorial](https://restfulapi.net)
+* [REST API Tutorial by Lokesh Gupta](https://restfulapi.net)
