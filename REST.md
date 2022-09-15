@@ -14,7 +14,7 @@ notes - Roy Fielding's paper - second pass
             an hybrid architecutral style
                 of other networked-based architecutral styles for distributed hypermedia systems
             a set of architecutral constraints which retain the software engineering principles guiding itself
-        functionalities
+        functions
             defines interaction constraints chosen to retain software engineering principles guiding REST
         properties
             contrasts software engineering principles guiding REST to the constraints of other architectural styles
@@ -28,6 +28,7 @@ notes - Roy Fielding's paper - second pass
                     components
                     connectors
                     data that define the basis of the Web architecture
+            enforces stateless interactions between architecutral components
         mechanism
             elements
                 constraints
@@ -60,18 +61,31 @@ notes - Roy Fielding's paper - second pass
                                     definitions
                                         a triggering process which consumes services
                                     roles
-                                        functionalities
+                                        functions
+                                            initiates communication by making a request
                                             makes requests via connector to servers that triggers reactions from servers
+                                    properties
+                                        a component may include both client and server connectors
+                                    example instances
+                                        libwww
+                                        libwww-perl
                                 server
                                 ^^^^^^
                                     definitions
                                         a reactive and non-terminating process which offers services to clients
                                     roles
-                                        functionalities
+                                        functions
                                             waits for requests to be made and then reacts to them
                                                 operations
                                                     listens for requests upon services
                                                     rejects or performs request and sends response to client
+                                            listens for connections and responds to requests in order to supply access to its services
+                                    properties
+                                        a component may include both client and server connectors
+                                    example instances
+                                        libwww
+                                        Apache API
+                                        NSAPI
                     Stateless
                     =========
                         definition
@@ -85,14 +99,20 @@ notes - Roy Fielding's paper - second pass
                                     how to create a system that eases the task of recovering from partial failures
                                 scalability
                                     how to create a system that does not put pressure on the servers' data storage space
-                        functionalities
+                        functions
                             enforces clients and servers to make comprehensive requests/responses
+                            removes any need for the connectors to retain application state between requests
+                            allows interactions to be processed in parallel without requiring that the processing mechanism understand the interaction semantics
+                            allows an intermediary to view and understand a request in isolation
+                            forces all of the information that might factor into the reusability of a cached response to be present in each request
                         mechanism
                             elements
                                 constraints
                                 ^^^^^^^^^^^
-                                    each request must contain all of the information necessary to understand the request
+                                    each request must contain all of the information necessary for the connectors to understand the request
                                     a request cannot take advantage of any stored context on the server
+                        properties
+                            reduces consumption of physical resources improving scalability
                         induced disadvantages
                             increased per-interaction overhead
                             reduced control over consistent application behavior
@@ -108,22 +128,47 @@ notes - Roy Fielding's paper - second pass
                                 how to improve network efficiency
                                 how to improve user perceived performance
                                     how to decrease average latency of a series of interactions
-                        functionalities
+                        functions
                             partially or completely eliminate some interactions
+                            saves cacheable responses to current interactions so that they can be reused for later requested interactions
+                            determine the cacheability of a response
                         mechanism
                             elements
-                                requirements
+                                requirements (constraints)
                                     response must indicate cacheability (reusability)
                                         labels
                                             cachable
                                             non-cacheable
                                     roles
                                         allows clients to determine the reusability of and accessibility to the reusable (cacheable) response data
+                                interface
+                                    properties
+                                        is generic rather than specific to each resource
+                                configurations
+                                    default configuration
+                                        response to a retrieval request is cacheable
+                                        responses to other requests are non-cacheable
+                        properties
+                            can be located on the interface to a client or server connector
+                            implemented within the address space of the connector that uses it
+                            some cache connectors are shared
+                            shared caching can be effective at reducing the impact of "flash crowds" on the load of a popular server, particularly when the caching is arranged hierarchically to cover large groups of users
+                            shared caching can lead to errors if the cached response does not match what would have been obtained by a new request
+                        purpose of use
+                            by client
+                                to reduce interaction latency
+                                    by avoiding repetitive network communication
+                            by server
+                                to reduce interaction latency
+                                    by avoiding repeated process of generating a response
                         induced disadvantages
                             ?decreased reliability
                                 mechanism
                                     cause
                                         stale data within the cache differs significantly from the data that would have been obtained had the request been sent directly to the server
+                        example instances
+                            browser cache
+                            Akamai cache network
                     Uniform Interface
                     =================
                         definition
@@ -133,7 +178,7 @@ notes - Roy Fielding's paper - second pass
                             problems
                                 how to simplify the overall system architecure and improve the visibility of interactions
                                 how to encourage independent evolvability of architecutral components
-                        functionalities
+                        functions
                             defines an uniform interface between architecutral components
                             decouples architecutral implementation from services provided on the distributed hypermedia system
                             ?applies the software engineering principle of generality to the component interface
@@ -170,7 +215,7 @@ notes - Roy Fielding's paper - second pass
                                                             example
                                                                 Java
                                                         but not always
-                                        functionalities
+                                        functions
                                             focuses on a shared understanding of data types with metadata, but limits the scope of what is revealed to a standardized interface
                                             hides the difference between the raw source and the representation behind the interace
                                             approximates the benefits of the mobile (Code on Demand) object style 
@@ -222,6 +267,7 @@ notes - Roy Fielding's paper - second pass
                                                     resource identifer
                                                     ^^^^^^^^^^^^^^^^^^
                                                         example instances
+                                                            URI
                                                             URL
                                                             URN
                                                 representation
@@ -232,7 +278,7 @@ notes - Roy Fielding's paper - second pass
                                                     solution for
                                                         problems
                                                             how to capture the state of the resource and transfer them between components
-                                                    functionalities
+                                                    functions
                                                         represents the current or intended state of the resource in a sequence of bytes, plus representation metadata to describe those bytes
                                                         indicates the state of the requested resource
                                                             current state
@@ -246,6 +292,8 @@ notes - Roy Fielding's paper - second pass
                                                     form
                                                         data format
                                                             media type
+                                                                properties
+                                                                    design of it can directly impact the user-perceived performance of a distributed hypermedia system
                                                                 example instances
                                                                     application/javascript
                                                                     application/json
@@ -260,6 +308,7 @@ notes - Roy Fielding's paper - second pass
                                                         some are intended for automated processing
                                                         some are intended to be rendered for viewing by a user
                                                         composite media types can be used to enclose multiple representations in a single message
+                                                        rendering ability can be impacted by the choice of content
                                                     mechanism
                                                         elements
                                                             components
@@ -286,9 +335,14 @@ notes - Roy Fielding's paper - second pass
                                                     definition
                                                         solution for
                                                             problems
-                                                    functionalities
+                                                    functions
                                                         defines the purpose of a message between components
                                                         parameterizes requests and override the default behavior of some connecting architecutral elements
+                                                        override the default chache configuration by marking the interaction
+                                                            marks
+                                                                cacheable
+                                                                non-cacheable
+                                                                cacheable for only a limited time
                                                     properties
                                                         is included in the request or response message
                                                     example instances
@@ -310,17 +364,72 @@ notes - Roy Fielding's paper - second pass
                                     connectors
                                     ----------
                                         definition
+                                            is a reference to architecutral components of distributed hypermedia systems
+                                            is an implementation of separation of concerns
+                                            is an implementation of generality
                                         solution for
                                             problems
-                                        functionalities
-                                            provide a generic interface for accessing and manipulating the value set of a resource
+                                        functions
+                                            provides a generic interface for accessing and manipulating the value set of a resource
                                                 regardless of how the membership function is defined or the type of software that is handling the request
+                                            encapsulates the activities of accessing resources and transferring resource representations
+                                            presents an abstract interface for component communication
+                                        types
+                                            client
+                                            ^^^^^^
+                                            server
+                                            ^^^^^^
+                                            cache
+                                            ^^^^^
+                                            resolver
+                                            ^^^^^^^^
+                                                definition
+                                                    an architecutral element that translates resource identifiers into network address information needed to establish an inter-component connection
+                                                solution for
+                                                    problems
+                                                pupose of use
+                                                    usecases
+                                                functions
+                                                    translates partial or complete resource identifiers into the network address information needed to establish an inter-component connection
+                                                mechanism
+                                                    elements
+                                                        roles
+                                                properties
+                                                    use of one or more intermediate resolvers can improve the longevity of resource references through indirection
+                                                configuration
+                                                example instances
+                                                    bind (DNS lookup library)
+                                            tunnel
+                                            ^^^^^^
+                                                example instances
+                                                    SOCKS
+                                                    SSL after HTTP CONNECT
+                                        properties
+                                            enhances simplicity by providing a clean separation of concerns and hiding the underlying implementation of resources and communication mechanisms
+                                            the generality of the interface enables substitutability of implementation
                                         mechanism
                                             elements
+                                                connector interface
+                                                    mechanism
+                                                        elements
+                                                            in-parameters
+                                                                mechanism
+                                                                    components
+                                                                        request control data
+                                                                        resource identifier indicating the target of the request
+                                                                        optional representation
+                                                            out-parameters
+                                                                mechanism
+                                                                    components
+                                                                        response control data
+                                                                        optional resource metadata
+                                                                        optional representation
+                                                            properties
+                                                                can be passed as data streams
                                                     roles
                                         limitations
                                             cause
-                                        examples
+                                        example instances
                                     components
                                     ----------
                         induced disadvantages
@@ -336,505 +445,7 @@ notes - Roy Fielding's paper - second pass
         limitations
         examples
         
-        
 
-notes - Roy Fielding's paper - first pass
-    Network-based Architectural Styles
-    ##################################
-        hierarchical styles
-        ===================
-            Client-Server (CS)
-            ------------------
-                architectural style for network-based applications
-                    implementation of separation of concerns
-                architecutral components
-                    server
-                        a reactive process
-                            offers set of services
-                        waits for requests to be made and then reacts to them
-                            listens for requests upon services
-                            rejects or performs request and sends response to client
-                        common properties
-                            a non-terminating process
-                            provides service to more than one client
-                    client
-                        a triggering process
-                            consumes services
-                        makes requests that triggers reactions from servers
-                            sends requests to server via connector
-            Layerd System (LS)
-            ------------------
-                is
-                    organized hierarchically
-                provides service
-                    to layer above itself
-                uses services
-                    of layer below itself
-                use within networked-based systems is limited
-                    to its combination with the client-server style
-                        to provide Layere-Client-Server
-                            Layered-Client-Server (LCS)
-                            ---------------------------
-                                adds ___
-                                    ___
-                                        proxy
-                                            acts as a shared server for one or more client components
-                                            roles
-                                                takes request
-                                                forwards request
-                                                    to server components
-                                                can translate requests
-                                        gateway
-                                            appearts to be normal server
-                                                to
-                                                    ___ that request its services
-                                                        ___
-                                                            clients
-                                                            proxies
-                                            roles
-                                                takes request
-                                                forwards request
-                                                    to inner-layer server components
-                                                can translate requests
-                                        is
-                                            additional mediator server components
-                                            solution
-                                                to managing identity
-                                                    in a large scale distributed system
-                                                        where complete knowledge of all servers would be prohibitively expensive
-                                                    the solution
-                                                        instead of trying to store complete knowlege of all servers,
-                                                            servers are organized in layers
-                                                                such that rarely used services are handled by intermediaries
-                                                                    rather than directly by each client
-                                        allows
-                                            features of the system
-                                                load balancing
-                                                security checking
-                                    to client-server style
-                implementation examples
-                    TCP/IP
-                    OSI protocol stacks
-                    hardware interface libraries
-                induces disadvantages
-                    increased ___
-                        ___
-                            overhead
-                            latency
-                        to the processing of data
-                        induces
-                            reduced user-percieved performance
-        mobile code styles
-        ==================
-            Code on Demand (COD)
-            --------------------
-                code
-                    is
-                        set of instructions on how to process a given resource
-                client component
-                    has access to resources
-                        but not the know-how to process them
-                    makes a request
-                        to get code representing the know-how to process the resource
-                    executes the code to process the resource locally
-                                   └─ know-how
-                induces advantages
-                    ability to add features to a deployed client
-                        induces advantages
-                            improved ___
-                                ___
-                                    extensibility
-                                    configurability
-                                    user-percieved performance
-                                    efficiency
-                                    scalability of server
-                                        induced by
-                                            enabling the server to off-load work to the client
-                                                that would otherwise consumed its resources
-                                when the code can adapt its actions to the client's environment
-                                    and interact with the user locally
-                                        rather than through remote interactions
-                        induces disadvantages
-                            reduced simplicity
-                                due to the need to manage the evaluation environment
-                                may be compensated
-                                    as a result of simplifying the client's static functionality
-                            lack of visibility
-                                induced by
-                                    server sending code instead of simple data
-                                induces
-                                    deployment problems
-                                        if the client cannot trust the servers
-    perspectives on the process of architecutral designs
-        a perspective
-            purposes the process
-                differentiate the design space
-                allow to flow forces that influence system behavior
-                    naturally
-                    in harmony with the system
-            process
-                designer
-                    starts with system needs as a whole without constraints
-                    ___ constraints
-                        incrementally 
-                        ___
-                            identifies
-                            applies
-                        to elements of the system
-            puts emphasis on
-                restraint
-                understanding of the system context
-            used to deploy REST
-    Representational State Transfer (REST)
-    ######################################
-        how the paper describes the reaionalte behind the web architecure (REST)
-            by describing
-                the process of designing a network-based web architecure 
-                    adding one constraint at a time
-                the specific constraints that compose the architectural style
-        is
-            network-based architecutral style
-                used for
-                    distributed hypermedia systems
-                property
-                    hybrid-style
-                        style is derived from several other network-based architectural styles
-            abstraction of the architectural elements
-                within a distributed hypermedia system
-            a hybrid
-                of the three options available for distributed hypermedia architect
-                    the options
-                        render the data where it is located and send a fixed-format image to the recipient
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                            the Client-Server style
-                            advantages
-                                allows all information about the true nature of the data to remain hidden within the sender
-                                    prevents assumptions from being made about the data structure
-                                        makes client implementation easier
-                            disadvantages
-                                severly restricts the functionality of the recipient
-                                places most of the processing load on the sender
-                                    can cause scalability problems
-                        encapsulate the data with a rendering engine and send both to the recipient
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                            the mobile object style
-                            advantages
-                                provides information hiding while enabling specialized processing of data
-                                    via its unique rendering engine
-                            disadvantages
-                                limits the functionality of the recipient
-                                    to what is anticipated within that engine
-                                may vastly increase the amount of data transferred
-                        send the raw data to the recipient along with the metadata that describes the data type
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                            so that the recipient can choose their own rendering engine
-                                advantages
-                                    allows the sender to remain simple and scalable
-                                    minimizes the bytes transferred
-                                disadvantages
-                                    loses the advantage of information hiding
-                                    requires that both sender and recipient understands the data types
-        REST components
-            is
-                set of architecutral constraints
-                    chosen for the properties they induce
-                        on candidate architectures
-            do
-                communicate by transferring a representation of a resource
-                    in a format matching one of an evolving set of standard types
-        ignores the details
-            of
-                component implementation
-                protocol syntax
-        focuses on
-            roles of the components
-            the constraints upon their interaction with other components
-            their interpretation of significant data elements
-            shared understanding of data types
-                with metadata
-                but limiting the scope of what is revealed to a standardized interface
-        encompasses
-            fundamental constraints
-                upon
-                    components
-                    connectors
-                    data
-                        that define the basis of the Web architecture
-            essence of its behavior
-                as a network-based application
-        REST constraints
-        ================
-            null-style
-            ----------
-                empty set of constaints
-                no distinguished boundaries between architecutral components
-            Client-Server 
-            -------------
-                'separation of concerns'
-                    concerns
-                        user interface 
-                        data storage
-                    advantages
-                        portability of user interace across multiple platforms
-                        scalability
-                            because
-                                can simplify server components
-                        allows architecutral components to evolve independently
-            stateless
-            ---------
-                requirements
-                ^^^^^^^^^^^^
-                    each request must contain
-                        all of the information necessary to understand the request
-                    cannot take advantage of any stored context on the server
-                        session state is kept entirely on the client
-                advantages
-                    visibility
-                        because
-                            monitoring system does not have to look beyond a single request datum to determine the full nature of the request
-                    reliability
-                        because
-                            eases that task of recovering from partial failures
-                    scalability
-                        because
-                            does not put pressure on data storage space
-                                especially in-memory storage
-                            simplifies implementation
-                                becaues
-                                    server does not have to manage resource usage across requests
-                disadvantages
-                    increased per-interaction overhead
-                    reduced control over consistent application behavior
-                        induced by
-                            placing application states on the client-side 
-            cache
-            -----
-                purpose
-                    to improve network efficiency
-                requirements
-                ^^^^^^^^^^^^
-                    response must indicate cacheability
-                        labels (indication)
-                            cachable
-                            non-cacheable
-                client-cache-stateless-server style
-                    cacheable response
-                        client cache reuses response data
-                            for ___ requests
-                                ___
-                                    later
-                                    equivalent
-                induces advantages
-                    improved
-                        efficiency
-                        scalability
-                    elimination of some interactions
-                        degree
-                            partially
-                            completely
-                        results in
-                            improved user perceived performance
-                                induced by
-                                    decreased average latency of a series of interactions
-                trade-off
-                    disadvantage
-                        induces architecutral properties
-                            decreased reliability
-                                induced by
-                                    significant difference between
-                                        stale data within cache
-                                        data that would have been obtained
-                                            had the request been sent directly to the server
-            uniform interface
-            -----------------
-                is
-                    application of 'generality'
-                        to
-                            architecutral component interface
-                    designed to increase efficiency
-                        for common case of the Web
-                interface constaints
-                    is
-                        constraints needed to guide the behavior of architecutral components
-                    constaints
-                    ^^^^^^^^^^
-                        identification of resources
-                        manipulation of resources through representations
-                        self-descriptive messages
-                        hypermedia as the engine of application state
-                induces
-                    advantages
-                        simplified overall system architecture
-                        improved visibility of interactions
-                        independent evolvability
-                            induced by
-                                decoupling of
-                                    architectural implementation
-                                    service provided on the architecture
-                    disadvantages
-                        degrades efficiency
-                            induced by
-                                standardization of transferring methods
-                                    of information
-                            because the architecture does not
-                                use transferring methods which is most appropriate for a specific application's need
-            Layered System
-            --------------
-                allows an achitecture to be composed of
-                    hierarchical layers
-                how it is enabled
-                    by restricting knowledge of the system
-                        to ___ layer
-                            ___
-                                single
-                                immediate
-                layers
-                    can be used to
-                        encapsulate legacy services
-                        protects new services from legacy clients
-                    allows
-                        security policies to be enforced
-                            on data crossing the organizational boundary
-                                as is required by firewalls
-                intermediaries
-                    can be used to
-                        improve scalability
-                            by
-                                enabling load balancing of services
-                                    across
-                                        multiple networks
-                                        processors
-                simplifies architectural components
-                    by
-                        moving infrequently used functionality to a shared intermediary
-                promotes substrate independence                           
-                    induced by
-                        placing bounds on the overall system complexity
-                induces disadvantage
-                    increased ___
-                        ___
-                            overhead
-                            latency
-                        to the processing of data
-                        induces
-                            reduced user-percieved performance
-                        can be offset
-                            for network-based systems that supports cache constraints
-                            by the benefits
-                                of shared caching
-                                    at intermediaries
-                induces architectural properties
-                    by combination of ___
-                        ___
-                            layerd system
-                            uniform interface constraints
-                        data flows of hypermedia interaction can each be processed like a data-flow network
-                            regardless of the fact that REST interaction is two-way
-                        filter components can be selectively applied
-                            to the data stream
-                                in order to
-                                    transform the content as it passes
-            Code-on-Demand (COD)
-            --------------------
-                is
-                    optional constraint
-                    ^^^^^^^^^^^^^^^^^^^
-                induces advantages
-                    extension of client functionality
-                        by
-                            downloading and executing code
-                                form of code
-                                    applets
-                                    scripts
-                    simplification of clients
-                        induced by
-                            reduced number of features required to be pre-implemented
-                induces disadvantages
-                    reduced visibility
-                ?architecture only gains benefit when they are known to be in effect for some realm of the overall system
-            style derivitation summary
-            --------------------------
-        REST architecutral elements
-        ===========================
-            data elements
-            -------------
-                resource
-                    solution for
-                        problems
-                            
-                    definition
-                        any information that can be named
-                        the intended conceptual target of a hypertext reference
-                        conceptual mapping to set of entities
-                        definition is abstract
-                            allows features of the Web architecture
-                    functionalities
-                        abstracts information
-                            contain
-                                any concept that might be the target of an author's hypertext reference           
-                    mechanism
-                        elements
-                            roles
-                    examples
-                        weather information
-                        person
-                        e-commerce order details
-                    necessity
-                        because it may be an element of a service
-                resource identifer
-                    examples
-                        URL
-                        URN
-                representation
-                    definition
-                        sequence of bytes + representation metadata to describe the bytes
-                    do
-                    mechanism
-                        elements
-                            data
-                                represents the resource
-                            representation metadata
-                                describes the data
-                                form
-                                    name=value pair
-                            metadata of representation metadata
-                                describes the metadata of data
-                            resource metadata
-                                describes about the resource that is not specific to the supplied representation
-                            control data
-                                defines the purpose of a message between components
-                                used to parameterize requests and override the default behavior of some connecting elements
-                    limitations
-                    examples
-                        HTML document
-                        JPEG image
-                        JSON object
-                representation metadata
-                    media type
-                    last-modified time
-                resource metadata control data
-                    source link
-                    alternates
-                    vary if-modified-since
-                    cache-control
-            resources and resource identifiers
-            ----------------------------------
-            representations
-            ---------------
-            connectors
-            ----------
-            components
-            ----------
-        REST architecutral views
-        ========================
-            process view
-            ------------
-            connector view
-            --------------
-            data view
-            ---------
-                                
-                
 notes - REST Tutorial by Lokesh Gupta
     architectural style
         distributed hypermedia systems
