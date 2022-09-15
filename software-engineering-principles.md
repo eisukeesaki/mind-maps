@@ -1,8 +1,47 @@
-# 
+# Software Engineering Principles
 
 ```text
 
-software engineering
+Software Engineering Principles
+    Separation of Concerns
+        definition
+            a recognition of the need for human beings to work within a limited context
+            an act of classifying and separating conerns based on the classification
+        solution for
+            problems
+                the human mind is limited to dealing with approximately seven units of data at a time
+                    a unit
+                        something that a person has learned to deal with as a whole
+                        a single abstraction or concept
+                how to specify the behavior of a data structure component
+                    solution
+                        divide basic functionality and support for data integrity as much as posible into separate sets of client functions
+                there are often efficient algorithms for optimizing a single measurable quantity, but not for problems requiring optimization of a combination of quantities
+                    solution
+                        deal with different conerns at different times in the software development process
+                        structure the design so that responsibility for dealing with different concern is assigned to different components
+                    examples
+                        run-time efficiency is one concern that frequently conflicts with other software concerns
+                            solution
+                                deal with efficiency as a separate concern
+                                check and analyze the run time after the software is designed to meet other criterias to see where the time is being spent
+        functionalities
+        mechanism
+            elements
+                    roles
+        limitations
+            cause
+        examples
+    Modularity
+    Abstraction
+    Anticipation of Change
+    Generality
+        definition
+            designing of software that is free from unnatural restrictions and limitations
+    Incremental Development
+    Consistency
+
+software engineering - notes
     principles
         └─ foundation for system
         separation of concerns

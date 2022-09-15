@@ -21,3 +21,16 @@ my mind maps
                     not always considred
                         just like in this case
 
+information input framework
+    technological concept
+        definition
+        solution for
+            problems
+        functionalities
+        mechanism
+            elements
+                roles
+        limitations
+        example instances
+        usecases
+                            

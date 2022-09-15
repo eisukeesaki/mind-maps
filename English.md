@@ -2,6 +2,11 @@
 
 ```text
 
+descriptors
+    quality
+    nature
+    quantity
+
 English words
     class
         division
