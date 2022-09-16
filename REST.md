@@ -82,6 +82,8 @@ notes - Roy Fielding's paper - second pass
                         pupose of use
                             usecases
                         functions
+                            remove the need for an awareness of the overall component topology
+                            allow components to act as either destinations or intermediaries, determined dynamically by the target of each request
                             enforce clients and servers to make comprehensive requests/responses
                             remove any need for the connectors to retain application state between requests
                             allow interactions to be processed in parallel without requiring that the processing mechanism understand the interaction semantics
@@ -90,7 +92,7 @@ notes - Roy Fielding's paper - second pass
                         form
                             elements
                                 constraints
-                                ^^^^^^^^^^^
+                                ___________
                                     each request must contain all of the information necessary for the connectors to understand the request
                                     a request cannot take advantage of any stored context on the server
                         mechanism
@@ -128,13 +130,19 @@ notes - Roy Fielding's paper - second pass
                         mechanism
                             elements
                                 constraints
-                                -----------
+                                ___________
                                     identification of resources
+                                    ---------------------------
                                     manipulation of resources through representations
+                                    -------------------------------------------------
                                     self-descriptive messages
+                                    -------------------------
+                                        properties
+                                            enables intermediate processing
                                     hypermedia as the engine of application state
-                                    roles
-                                        guides the behavior of architecutral components
+                                    ---------------------------------------------
+                                    function
+                                        guide the behavior of architecutral components
                         properties
                         configuration
                         example instances
@@ -285,6 +293,9 @@ notes - Roy Fielding's paper - second pass
                                             form
                                                 data format
                                                     media type
+                                                    ----------
+                                                        function
+                                                            indicate semantics and exchange information
                                                         properties
                                                             design of it can directly impact the user-perceived performance of a distributed hypermedia system
                                                         example instances
@@ -348,6 +359,7 @@ notes - Roy Fielding's paper - second pass
                                                         cacheable
                                                         non-cacheable
                                                         cacheable for only a limited time
+                                                indicate semantics and exchange information
                                             form
                                                 elements
                                                         roles
@@ -386,148 +398,152 @@ notes - Roy Fielding's paper - second pass
                                         regardless of how the membership function is defined or the type of software that is handling the request
                                     encapsulate the activities of accessing resources and transferring resource representations
                                     present an abstract interface for component communication
-                                form of connector types
-                                    client
-                                    ______
-                                        definitions
-                                            a triggering process which consumes services
-                                            an architecutral component of distributed hypermedia systems refered to as the connector
-                                        solution for
-                                            problems
-                                        pupose of use
-                                            usecases
-                                        functions
-                                            initiate communication by making a request
-                                            make requests via connector to servers that triggers reactions from servers
-                                        form
-                                            elements
-                                                    roles
-                                        mechanism
-                                        properties
-                                            a component may include both client and server connectors
-                                        configuration
-                                        example instances
-                                            libwww
-                                            libwww-perl
-                                    server
-                                    ______
-                                        definitions
-                                            a reactive and non-terminating process which offers services to clients
-                                            an architecutral component of distributed hypermedia systems refered to as the connector
-                                        solution for
-                                            problems
-                                        pupose of use
-                                            usecases
-                                        functions
-                                            wait for requests to be made and then reacts to them
-                                                operations
-                                                    listens for requests upon services
-                                                    rejects or performs request and sends response to client
-                                            listen for connections and responds to requests in order to supply access to its services
-                                        form
-                                            elements
-                                                    roles
-                                        mechanism
-                                        properties
-                                            a component may include both client and server connectors
-                                        configuration
-                                        example instances
-                                            libwww
-                                            Apache API
-                                            NSAPI
-                                    cache
-                                    _____
-                                        definition
-                                            architectural style for network-based applications
-                                            architecutral constraint intended to improve network efficiency
-                                        solution for
-                                            problems
-                                                how to improve network efficiency
-                                                how to improve user perceived performance
-                                                    how to decrease average latency of a series of interactions
-                                        purpose of use
-                                            by client
-                                                to reduce interaction latency
-                                                    by avoiding repetitive network communication
-                                            by server
-                                                to reduce interaction latency
-                                                    by avoiding repeated process of generating a response
-                                        functions
-                                            partially or completely eliminate some interactions
-                                            save cacheable responses to current interactions so that they can be reused for later requested interactions
-                                            determine the cacheability of a response
-                                        form
-                                            elements
-                                                requirements (constraints)
-                                                    response must indicate cacheability (reusability)
-                                                        labels
-                                                            cachable
-                                                            non-cacheable
-                                                    roles
-                                                        allows clients to determine the reusability of and accessibility to the reusable (cacheable) response data
-                                                interface
-                                                    properties
-                                                        is generic rather than specific to each resource
-                                                configurations
-                                                    default configuration
-                                                        response to a retrieval request is cacheable
-                                                        responses to other requests are non-cacheable
-                                        mechanism
-                                        properties
-                                            can be located on the interface to a client or server connector
-                                            implemented within the address space of the connector that uses it
-                                            some cache connectors are shared
-                                            shared caching can be effective at reducing the impact of "flash crowds" on the load of a popular server, particularly when the caching is arranged hierarchically to cover large groups of users
-                                            shared caching can lead to errors if the cached response does not match what would have been obtained by a new request
-                                        configuration
-                                        example instances
-                                            browser cache
-                                            Akamai cache network
-                                        induced disadvantages
-                                            ?decreased reliability
-                                                mechanism
-                                                    cause
-                                                        stale data within the cache differs significantly from the data that would have been obtained had the request been sent directly to the server
-                                    resolver
-                                    ________
-                                        definition
-                                            an architecutral element that translates resource identifiers into network address information needed to establish an inter-component connection
-                                        solution for
-                                            problems
-                                        pupose of use
-                                            usecases
-                                        functions
-                                            translate partial or complete resource identifiers into the network address information needed to establish an inter-component connection
-                                        form
-                                            elements
-                                                    roles
-                                        mechanism
-                                        properties
-                                            use of one or more intermediate resolvers can improve the longevity of resource references through indirection
-                                            ?acts an intermediary architecutral component of distributed hypermedia system
-                                        configuration
-                                        example instances
-                                            bind (DNS lookup library)
-                                    tunnel
-                                    ______
-                                        definition
-                                        solution for
-                                            problems
-                                        pupose of use
-                                            usecases
-                                        functions
-                                            relay communication across a connection boundary
-                                        form
-                                            elements
-                                                    roles
-                                        mechanism
-                                        properties
-                                        configuration
-                                        example instances
-                                            SOCKS
-                                            SSL after HTTP CONNECT
-                                            firewall
-                                            lower-level network gateway
+                                    cache the existence and capabilities of other components for performance reasons
+                                form
+                                    elements
+                                        interface
+                                    form of types
+                                        client
+                                        ______
+                                            definitions
+                                                a triggering process which consumes services
+                                                an architecutral component of distributed hypermedia systems refered to as the connector
+                                            solution for
+                                                problems
+                                            pupose of use
+                                                usecases
+                                            functions
+                                                initiate communication by making a request
+                                                make requests via connector to servers that triggers reactions from servers
+                                            form
+                                                elements
+                                                        roles
+                                            mechanism
+                                            properties
+                                                a component may include both client and server connectors
+                                            configuration
+                                            example instances
+                                                libwww
+                                                libwww-perl
+                                        server
+                                        ______
+                                            definitions
+                                                a reactive and non-terminating process which offers services to clients
+                                                an architecutral component of distributed hypermedia systems refered to as the connector
+                                            solution for
+                                                problems
+                                            pupose of use
+                                                usecases
+                                            functions
+                                                wait for requests to be made and then reacts to them
+                                                    operations
+                                                        listens for requests upon services
+                                                        rejects or performs request and sends response to client
+                                                listen for connections and responds to requests in order to supply access to its services
+                                            form
+                                                elements
+                                                        roles
+                                            mechanism
+                                            properties
+                                                a component may include both client and server connectors
+                                            configuration
+                                            example instances
+                                                libwww
+                                                Apache API
+                                                NSAPI
+                                        cache
+                                        _____
+                                            definition
+                                                architectural style for network-based applications
+                                                architecutral constraint intended to improve network efficiency
+                                            solution for
+                                                problems
+                                                    how to improve network efficiency
+                                                    how to improve user perceived performance
+                                                        how to decrease average latency of a series of interactions
+                                            purpose of use
+                                                by client
+                                                    to reduce interaction latency
+                                                        by avoiding repetitive network communication
+                                                by server
+                                                    to reduce interaction latency
+                                                        by avoiding repeated process of generating a response
+                                            functions
+                                                partially or completely eliminate some interactions
+                                                save cacheable responses to current interactions so that they can be reused for later requested interactions
+                                            form
+                                                elements
+                                                    requirements (constraints)
+                                                        response must indicate cacheability (reusability)
+                                                            labels
+                                                                cachable
+                                                                non-cacheable
+                                                        roles
+                                                            allows clients to determine the reusability of and accessibility to the reusable (cacheable) response data
+                                                    interface
+                                                        properties
+                                                            is generic rather than specific to each resource
+                                                    configurations
+                                                        default configuration
+                                                            response to a retrieval request is cacheable
+                                                            responses to other requests are non-cacheable
+                                            mechanism
+                                                the cacheability of a response is determined by the server and indicated in the response
+                                            properties
+                                                can be located on the interface to a client or server connector
+                                                implemented within the address space of the connector that uses it
+                                                some cache connectors are shared
+                                                shared caching can be effective at reducing the impact of "flash crowds" on the load of a popular server, particularly when the caching is arranged hierarchically to cover large groups of users
+                                                shared caching can lead to errors if the cached response does not match what would have been obtained by a new request
+                                            configuration
+                                            example instances
+                                                browser cache
+                                                Akamai cache network
+                                            induced disadvantages
+                                                ?decreased reliability
+                                                    mechanism
+                                                        cause
+                                                            stale data within the cache differs significantly from the data that would have been obtained had the request been sent directly to the server
+                                        resolver
+                                        ________
+                                            definition
+                                                an architecutral element that translates resource identifiers into network address information needed to establish an inter-component connection
+                                            solution for
+                                                problems
+                                            pupose of use
+                                                usecases
+                                            functions
+                                                translate partial or complete resource identifiers into the network address information needed to establish an inter-component connection
+                                            form
+                                                elements
+                                                        roles
+                                            mechanism
+                                            properties
+                                                use of one or more intermediate resolvers can improve the longevity of resource references through indirection
+                                                ?acts an intermediary architecutral component of distributed hypermedia system
+                                            configuration
+                                            example instances
+                                                bind (DNS lookup library)
+                                        tunnel
+                                        ______
+                                            definition
+                                            solution for
+                                                problems
+                                            pupose of use
+                                                usecases
+                                            functions
+                                                relay communication across a connection boundary
+                                            form
+                                                elements
+                                                        roles
+                                            mechanism
+                                            properties
+                                            configuration
+                                            example instances
+                                                SOCKS
+                                                SSL after HTTP CONNECT
+                                                firewall
+                                                lower-level network gateway
                                 mechanism
                                     elements
                                         connector interface
@@ -549,8 +565,9 @@ notes - Roy Fielding's paper - second pass
                                                         can be passed as data streams
                                             roles
                                 properties
-                                    enhances simplicity by providing a clean separation of concerns and hiding the underlying implementation of resources and communication mechanisms
+                                    it enhances simplicity by providing a clean separation of concerns and hiding the underlying implementation of resources and communication mechanisms
                                     the generality of the interface enables substitutability of implementation
+                                    it need only be aware of each other's existence during the scope of their communication
                                 configuration
                                 example instances
                             components
@@ -611,6 +628,8 @@ notes - Roy Fielding's paper - second pass
                                             properties
                                                 imposed by the network or origin server
                                                 its use is not determined by a client
+                                                assists in communication translation
+                                                improves performance via large-scale, shared caching
                                             configuration
                                             example instances
                                                 Squid
@@ -640,6 +659,8 @@ notes - Roy Fielding's paper - second pass
                                             properties
                                                 act as both a client and a server
                                                 its use is determined by a client
+                                                assists in communication translation
+                                                improves performance via large-scale, shared caching
                                             configuration
                                             example instances
                                                 CERN Proxy
@@ -671,8 +692,10 @@ notes - Roy Fielding's paper - second pass
                                                 Netscape Navigator
                                                 Lynx
                                                 MOMspider
-                                    elements
-                                            roles
+                                        firewall
+                                        ________
+                                            definition
+                                                an intermediary architecutral component 
                                 mechanism
                                 properties
                                 configuration
@@ -680,10 +703,40 @@ notes - Roy Fielding's paper - second pass
                     mechanism
                     properties
                         some REST components may dynamically switch from active component behavior to that of a tunnel
+                        is connected dynamically
+                        communicates via bidirectional streams
+                        can be placed on the stream based on the properties of each request or response
+                        the processing of each direction is independent and therefore susceptible to stream transducers (filters)
                     configuration
                     example instances
                         an HTTP proxy that switches to a tunnel in response to a CONNECT method request
         mechanism
+        #########
+            elements
+                the application of separation of concerns
+                =========================================
+                    effects
+                        simplifies component implementation
+                        reduces the complexity of connector semantics
+                        improves the effectiveness of performance tuning
+                        increases the scalability of pure server components
+                having applied the layered system constraint
+                ============================================
+                    effects
+                        allow intermediaries to be introduced at various points in the communication without changing the interfaces between components
+                having applied the self-descriptive message constraint
+                ======================================================
+                    effects
+                        enables intermediate processing
+                having applied the stateless constraint
+                =======================================
+                    effects
+                        allows each interaction to be independent of the others
+                            effects
+                                removes the need for an awareness of the overall component topology
+                                allows components to act as either destinations or intermediaries, determined dynamically by the target of each request
+                                results
+                                    Connectors need only be aware of each other's existence during the scope of their communication
         properties
             contrasts software engineering principles guiding REST to the constraints of other architectural styles
             ignores the details of component implementation and protocol syntax
@@ -698,6 +751,56 @@ notes - Roy Fielding's paper - second pass
                     data that define the basis of the Web architecture
             enforces stateless interactions between architecutral components
         example instances
+        how to view networked-based architectures for distributed hypermedia systems
+        ############################################################################
+            views
+                process view
+                ============
+                    definition
+                        a perspective for networked-based architectures that elicits the interaction relationships among components 
+                    solution for
+                        problems
+                    pupose of use
+                        usecases
+                    function
+                        elicits the interaction relationships among components by revealing the path of data as it flows through the system
+                    form
+                    mechanism
+                    properties
+                    configuration
+                    example instances
+                connector view
+                ==============
+                    definition
+                        a perspective for networked-based architectures that elicits the mechanics of the communication between components
+                    solution for
+                        problems
+                    pupose of use
+                        usecases
+                    functions
+                    form
+                        elements
+                                roles
+                    mechanism
+                    properties
+                    configuration
+                    example instances
+                data view
+                =========
+                    definition
+                        a perspective for networked-based architectures that elicits the application state as information flows through the components
+                    solution for
+                        problems
+                    pupose of use
+                        usecases
+                    functions
+                    form
+                        elements
+                                roles
+                    mechanism
+                    properties
+                    configuration
+                    example instances
         
 
 notes - REST Tutorial by Lokesh Gupta
