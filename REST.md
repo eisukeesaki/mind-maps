@@ -18,6 +18,7 @@ notes - Roy Fielding's paper - second pass
             usecases
         functions
             define interaction constraints chosen to retain software engineering principles guiding REST
+            constrain the interface between components, and hence the scope of interaction and implementation assumptions that might otherwise be made between components
         form
             elements
                 constraints
@@ -137,8 +138,22 @@ notes - Roy Fielding's paper - second pass
                                     -------------------------------------------------
                                     self-descriptive messages
                                     -------------------------
+                                        form
+                                            elements
+                                                control semantics
+                                                ^^^^^^^^^^^^^^^^^
+                                                    properties
+                                                        relatively slow in size
+                                                    example instance of request semantics
+                                                        the GET method in HTTP
+                                                complete resource representation
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                    properties
+                                                        relatively large in size
                                         properties
                                             enables intermediate processing
+                                            is dynamically sized
+                                        example instances
                                     hypermedia as the engine of application state
                                     ---------------------------------------------
                                     function
@@ -290,7 +305,9 @@ notes - Roy Fielding's paper - second pass
                                                             a representation of;
                                                                 the input data within a client's query form
                                                                 some error condition for a response
+                                                concentrate all of the control state
                                             form
+                                                actual representation data
                                                 data format
                                                     media type
                                                     ----------
@@ -318,6 +335,7 @@ notes - Roy Fielding's paper - second pass
                                                 some are intended to be rendered for viewing by a user
                                                 composite media types can be used to enclose multiple representations in a single message
                                                 rendering ability can be impacted by the choice of content
+                                                improves server scalability by eliminating any need for the server to maintain an awareness of the client state beyond the current request
                                             configuration
                                             example instances
                                                 HTML document
@@ -415,6 +433,7 @@ notes - Roy Fielding's paper - second pass
                                             functions
                                                 initiate communication by making a request
                                                 make requests via connector to servers that triggers reactions from servers
+                                                examine the resource identifier in order to select an appropriate communication mechanism for each request
                                             form
                                                 elements
                                                         roles
@@ -422,6 +441,8 @@ notes - Roy Fielding's paper - second pass
                                             properties
                                                 a component may include both client and server connectors
                                             configuration
+                                                 can be configured to connect to a specific proxy component, perhaps one acting as an annotation filter, when the identifier indicates that it is a local resource
+                                                 can be configured to reject requests for some subset of identifiers
                                             example instances
                                                 libwww
                                                 libwww-perl
@@ -677,6 +698,7 @@ notes - Roy Fielding's paper - second pass
                                             functions
                                                 initiate a request
                                                 provide access to information services and renders service responses according to the application needs
+                                                compose, controll, and store application state made of representation from multiple servers
                                             form
                                                 elements
                                                         roles
@@ -750,6 +772,10 @@ notes - Roy Fielding's paper - second pass
                     connectors
                     data that define the basis of the Web architecture
             enforces stateless interactions between architecutral components
+            does not restrict communication to a particular protocol
+            provides seamless access to resources that originate on pre-existing network servers, including FTP, Gopher, and WAIS
+            makes it possible to access a multitude of services through a single proxy
+            allows an application to implement and invoke additional capabilities as a separate system running in parallel
         example instances
         how to view networked-based architectures for distributed hypermedia systems
         ############################################################################
