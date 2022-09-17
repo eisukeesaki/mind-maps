@@ -7,15 +7,15 @@ notes - Roy Fielding's paper - second pass
     # Representational State Transfer (REST) #
     #########################################
         definition
+            an hybrid architecutral style of other networked-based architecutral styles for distributed hypermedia systems
+            a set of architecutral constraints that retain the software engineering principles guiding itself
             an abstraction of the architectural elements within a distributed hypermedia system
-            an hybrid architecutral style
-                of other networked-based architecutral styles for distributed hypermedia systems
-            a set of architecutral constraints which retain the software engineering principles guiding itself
         solution for
             problems
                 how to design a distributed hypermedia system?
         pupose of use
             usecases
+                web application of services
         functions
             define interaction constraints chosen to retain software engineering principles guiding REST
             constrain the interface between components, and hence the scope of interaction and implementation assumptions that might otherwise be made between components
@@ -591,137 +591,125 @@ notes - Roy Fielding's paper - second pass
                                     it need only be aware of each other's existence during the scope of their communication
                                 configuration
                                 example instances
-                            components
-                            ==========
-                                definition
-                                solution for
-                                    problems
-                                pupose of use
-                                    usecases
-                                functions
-                                form
-                                    type of components
-                                        origin server
-                                        _____________
-                                            definition
-                                                the definitive source for representations of its resources
-                                                the ultimate recipient of any request that intends to modify the value of its resources
-                                            solution for
-                                                problems
-                                            pupose of use
-                                                usecases
-                                            functions
-                                                govern the namespace for a requested resource
-                                                provide a generic interface to its services as a resource hierarchy
-                                                hide resource implementation details behind the generic interface
-                                            form
-                                                elements
-                                                    interface
-                                                        roles
-                                            mechanism
-                                            properties
-                                                uses a server connector
-                                            configuration
-                                            example instances
-                                                Apache httpd
-                                                Microsoft IIS
-                                        gateway
-                                        _______
-                                            a.k.a.
-                                                reverse proxy
-                                            definition
-                                                an intermediary architecutral component 
-                                            solution for
-                                                problems
-                                            pupose of use
-                                                usecases
-                                            functions
-                                                encapsulate interface
-                                                    of
-                                                        other services
-                                                        data translation
-                                                        performance enhancement
-                                                        security enforcement
-                                            form
-                                                elements
-                                                        roles
-                                            mechanism
-                                            properties
-                                                imposed by the network or origin server
-                                                its use is not determined by a client
-                                                assists in communication translation
-                                                improves performance via large-scale, shared caching
-                                            configuration
-                                            example instances
-                                                Squid
-                                                CGI
-                                                Reverse Proxy
-                                        proxy
-                                        _____
-                                            definition
-                                                an intermediary architecutral component 
-                                            solution for
-                                                problems
-                                            pupose of use
-                                                usecases
-                                            functions
-                                                forward request and responses
+                            types of components
+                            ===================
+                                origin server
+                                _____________
+                                    definition
+                                        the definitive source for representations of its resources
+                                        the ultimate recipient of any request that intends to modify the value of its resources
+                                    solution for
+                                        problems
+                                    pupose of use
+                                        usecases
+                                    functions
+                                        govern the namespace for a requested resource
+                                        provide a generic interface to its services as a resource hierarchy
+                                        hide resource implementation details behind the generic interface
+                                    form
+                                        elements
+                                            interface
+                                                roles
+                                    mechanism
+                                    properties
+                                        uses a server connector
+                                    configuration
+                                    example instances
+                                        Apache httpd
+                                        Microsoft IIS
+                                gateway
+                                _______
+                                    a.k.a.
+                                        reverse proxy
+                                    definition
+                                        an intermediary architecutral component 
+                                    solution for
+                                        problems
+                                    pupose of use
+                                        usecases
+                                    functions
+                                        encapsulate interface
+                                            of
+                                                other services
                                                 data translation
-                                                encapsulate interface
-                                                    of
-                                                        other services
-                                                        data translation
-                                                        performance enhancement
-                                                        security protection
-                                            form
-                                                elements
-                                                        roles
-                                            mechanism
-                                            properties
-                                                act as both a client and a server
-                                                its use is determined by a client
-                                                assists in communication translation
-                                                improves performance via large-scale, shared caching
-                                            configuration
-                                            example instances
-                                                CERN Proxy
-                                                Netscape Proxy
-                                                Gauntlet
-                                        user agent
-                                        __________
-                                            definition
-                                                any software, acting on behalf of a user, which retrieves, renders and facilitates end-user interaction with Web content
-                                            solution for
-                                                problems
-                                            pupose of use
-                                                usecases
-                                            functions
-                                                initiate a request
-                                                provide access to information services and renders service responses according to the application needs
-                                                compose, controll, and store application state made of representation from multiple servers
-                                            form
-                                                elements
-                                                        roles
-                                            mechanism
-                                            properties
-                                                becomes the ultimate recipient of the response
-                                                uses a client connector 
-                                            configuration
-                                            example instances
-                                                Google Chrome
-                                                Mozilla Firefox
-                                                Apple Safari
-                                                Netscape Navigator
-                                                Lynx
-                                                MOMspider
-                                        firewall
-                                        ________
-                                            definition
-                                                an intermediary architecutral component 
-                                mechanism
-                                properties
-                                configuration
-                                example instances
+                                                performance enhancement
+                                                security enforcement
+                                    form
+                                        elements
+                                                roles
+                                    mechanism
+                                    properties
+                                        imposed by the network or origin server
+                                        its use is not determined by a client
+                                        assists in communication translation
+                                        improves performance via large-scale, shared caching
+                                    configuration
+                                    example instances
+                                        Squid
+                                        CGI
+                                        Reverse Proxy
+                                proxy
+                                _____
+                                    definition
+                                        an intermediary architecutral component 
+                                    solution for
+                                        problems
+                                    pupose of use
+                                        usecases
+                                    functions
+                                        forward request and responses
+                                        data translation
+                                        encapsulate interface
+                                            of
+                                                other services
+                                                data translation
+                                                performance enhancement
+                                                security protection
+                                    form
+                                        elements
+                                                roles
+                                    mechanism
+                                    properties
+                                        act as both a client and a server
+                                        its use is determined by a client
+                                        assists in communication translation
+                                        improves performance via large-scale, shared caching
+                                    configuration
+                                    example instances
+                                        CERN Proxy
+                                        Netscape Proxy
+                                        Gauntlet
+                                user agent
+                                __________
+                                    definition
+                                        any software, acting on behalf of a user, which retrieves, renders and facilitates end-user interaction with Web content
+                                    solution for
+                                        problems
+                                    pupose of use
+                                        usecases
+                                    functions
+                                        initiate a request
+                                        provide access to information services and renders service responses according to the application needs
+                                        compose, controll, and store application state made of representation from multiple servers
+                                    form
+                                        elements
+                                                roles
+                                    mechanism
+                                    properties
+                                        becomes the ultimate recipient of the response
+                                        uses a client connector 
+                                    configuration
+                                    example instances
+                                        Google Chrome
+                                        Mozilla Firefox
+                                        Apple Safari
+                                        Netscape Navigator
+                                        Lynx
+                                        MOMspider
+                                firewall
+                                ________
+                                    definition
+                                        an intermediary architecutral component 
                     mechanism
                     properties
                         some REST components may dynamically switch from active component behavior to that of a tunnel
