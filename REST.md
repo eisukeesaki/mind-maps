@@ -1,4 +1,4 @@
-# REST
+[#](#) REST
 
 ```text
 
@@ -723,23 +723,23 @@ notes - Roy Fielding's paper - second pass
         mechanism
         #########
             elements
-                the application of separation of concerns
-                =========================================
+                separation of concerns
+                ======================
                     effects
                         simplifies component implementation
                         reduces the complexity of connector semantics
                         improves the effectiveness of performance tuning
                         increases the scalability of pure server components
-                having applied the layered system constraint
-                ============================================
+                layered system constraint
+                =========================
                     effects
                         allow intermediaries to be introduced at various points in the communication without changing the interfaces between components
-                having applied the self-descriptive message constraint
-                ======================================================
+                self-descriptive message constraint
+                ===================================
                     effects
                         enables intermediate processing
-                having applied the stateless constraint
-                =======================================
+                stateless constraint
+                ====================
                     effects
                         allows each interaction to be independent of the others
                             effects
