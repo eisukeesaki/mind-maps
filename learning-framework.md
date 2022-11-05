@@ -18,6 +18,8 @@ learning framework
     hypothesis
         develop
         test
+    questions
+        ask on subject
     phisiology
         take advantage of dopamine release
     psychology
