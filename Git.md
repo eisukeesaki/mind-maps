@@ -44,6 +44,8 @@ Git
     repository
         non-bare
             default
+            available operations
+                [commit](commit)
         bare
             serve as
                 authoritative focal point for collaborative development

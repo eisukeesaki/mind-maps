@@ -42,7 +42,7 @@ notes - Roy Fielding's paper - second pass
                         properties
                             no distinguished boundaries exist between architecutral components
                         configuration
-                        example instances
+                        example [instances](instances)
                     Client-Server
                     =============
                         definition
@@ -404,7 +404,7 @@ notes - Roy Fielding's paper - second pass
                             connectors
                             ========== 
                                 definition
-                                    is a reference to a set of architecutral components of distributed hypermedia systems
+                                    is reference to a set of architecutral components of distributed hypermedia systems
                                     is an implementation of separation of concerns
                                     is an implementation of generality
                                 solution for

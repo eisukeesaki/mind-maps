@@ -86,6 +86,7 @@ OAuth
                                     developer contact information
                                 configure scopes
                                     .../auth/userinfo.profile
+                                    .../auth/userinfo.email
                                 register test users
                             create credentials
                                 OAuth client ID

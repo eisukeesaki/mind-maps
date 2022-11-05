@@ -26,8 +26,8 @@ Domain Name System (DNS)
                         hostnames
                             left-most lable in a fully qualified domain name
         domain name servers
-            what
-                nodes within distributed database system (DNS)
+            definition
+                nodes within the distributed database system (DNS)
             role
                 implements DNS
             server
@@ -50,12 +50,11 @@ Domain Name System (DNS)
             syntax
                 [name] [type] [class] type data
         domain namespace
-            organized into tree data structure
-                constituents
+            is organized into tree data structure
+                components
                     node
-                        has
-                            label
-                            resource records
+                        label
+                        resource records
                 DNS zone tree
                     constituents
                         forward mapping

@@ -1,0 +1,51 @@
+Nginx
+    knowledge seed
+        how to setup nginx to serve up static content?
+            how to serve compiled Vue application?
+    ?event-based model
+    ?OS-dependent mechanisms
+    form
+        elements
+            configuration file
+                structure
+                    directives
+                        function
+                            controls modules
+                        types
+                            simple directives
+                            block directives
+                        syntax
+                    contexts
+                        main context
+                            definition
+                                directives placed in the configuration file outside of any contexts
+                default filename
+                    nginx.conf
+                location
+                    /usr/local/nginx/conf
+                    /etc/nginx
+                    /usr/local/etc/nginx
+            log files
+                access.log
+                error.log
+                location
+                    /usr/local/nginx/logs
+                    /var/log/nginx
+            executable
+                processes
+                    master process
+                        functions
+                            read and evaluate configuration
+                            maintain worker processes
+                            distribute requests among worker processes
+                        attributes
+                            process ID
+                                nginx.pid
+                                    /usr/local/nginx/logs
+                                    /var/run
+                        properties
+                            takes signals
+                    worker processes
+                        function
+                            do actual processing of requests
+            modules
