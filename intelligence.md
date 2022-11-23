@@ -1,6 +1,9 @@
 intelligence
     ability
         to
+            be aware
+                of
+                    as much things as possible
             recognize
                 recognize things for what they naturally are
             reference meaningful information
