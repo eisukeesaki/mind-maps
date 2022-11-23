@@ -8,7 +8,7 @@ User Interface (UI)
                     methods
                         getElementById(id)
                             returns an Element object matching id
-        design pattern
+        design patterns
             data binding
                 definition
                     technique that binds data sources from the provider and consumer together and synchronizes them
@@ -22,10 +22,10 @@ User Interface (UI)
                         definition
                             helper library that allows binding of UI components in layouts to data sources using a declarative paradigm
                         example instances
-                            React Redux
+                            reduxjs/react-redux
         tools
             libraries
-                React
+                facebook/react
                     definition
                         JS library for building UIs
                     use cases
@@ -81,4 +81,22 @@ User Interface (UI)
                         updating
                         unmounting
                         error handling
+                reduxjs/redux
+                    definition
+                        a library for managing and updating global application state, using events called "actions"
+                    functions
+                        serves as a centralized store for state that needs to be used across your entire application, with rules ensuring that the state can only be updated in a predictable fashion
+                    toolset
+                        example instances
+                            reduxjs/redux-toolkit
+                                constituents
+                                    packages and functions that reduxjs think are essential for building a Redux app
+                                functions
+                                    builds in our suggested best practices
+                                    simplifies most Redux tasks
+                                    prevents common mistakes
+                                    makes it easier to write Redux applications
+                reduxjs/react-redux
+                    lets React components interact with a Redux store
+
 
